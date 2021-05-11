@@ -1,6 +1,7 @@
 package backend.user;
 
-import backend.file.FileDB;
+
+import backend.picture.Picture;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -28,8 +29,12 @@ public class User {
     @Column(name = "name")
     private String name;
 
+    @OneToOne(mappedBy = "pictureOwner",targetEntity= Picture.class)
+    private Picture picture;
+/*
     @OneToOne(mappedBy = "fileOwner",targetEntity= FileDB.class)
     private FileDB fileDB;
+*/
 
     // Hibernate needs a default constructor to function
     public User() {}
@@ -74,6 +79,15 @@ public class User {
         this.name = name;
     }
 
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
+    }
+
+    /*
    public FileDB getFileDB() {
         return fileDB;
     }
@@ -81,4 +95,5 @@ public class User {
     public void setFileDB(FileDB fileDB) {
         this.fileDB = fileDB;
     }
+*/
 }

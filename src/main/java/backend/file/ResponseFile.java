@@ -1,3 +1,4 @@
+/*
 package backend.file;
 
 public class ResponseFile {
@@ -6,11 +7,15 @@ public class ResponseFile {
     private String type;
     private long size;
 
-    public ResponseFile(String name, String url, String type, long size) {
+    public ResponseFile(long id) {
+*/
+/*
         this.name = name;
         this.url = url;
         this.type = type;
-        this.size = size;
+*//*
+
+        this.size = id;
     }
 
     public String getName() {
@@ -44,4 +49,4 @@ public class ResponseFile {
     public void setSize(long size) {
         this.size = size;
     }
-}
+}*/

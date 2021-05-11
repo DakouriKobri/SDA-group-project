@@ -1,3 +1,4 @@
+/*
 package backend.file;
 
 public class ResponseMessage {
@@ -16,3 +17,4 @@ public class ResponseMessage {
     }
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package backend.file;
 
 import backend.user.User;
@@ -20,31 +21,43 @@ public class FileDB {
     @Column(nullable = false)
     private String name;
 
-    @NotBlank
-    @Column(nullable = false)
-    private String type;
+    @Lob
+    private byte[] data;
+
     @NotBlank
     @Column(nullable = false)
     private String likes;
 
 
+    @NotBlank
+    @Column(nullable = false)
+    private String location;
+
+    @JsonIgnore
     @OneToOne(targetEntity = User.class, cascade = CascadeType.ALL)
     private User fileOwner;
 
-    @Lob
-    private byte[] data;
+    TO USER___________________
+    @OneToOne(mappedBy = "fileOwner",targetEntity= FileDB.class)
+    private FileDB fileDB;
+    ___________________________
+
+
 
     //constructors
 
     public FileDB() {
     }
 
-    public FileDB(@NotBlank String name, @NotBlank String type, byte[] data, String like) {
+
+ */
+/*   public FileDB(@NotBlank String name, @NotBlank String type, String like) {
         this.name = name;
         this.type = type;
-        this.data = data;
         this.likes = like;
-    }
+    }*//*
+
+
 
     //getters and setters
 
@@ -72,14 +85,6 @@ public class FileDB {
         this.name = name;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public byte[] getData() {
         return data;
     }
@@ -95,9 +100,13 @@ public class FileDB {
     public void setLikes(String likes) {
         this.likes = likes;
     }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 }
-
-
-
-
-
+*/
