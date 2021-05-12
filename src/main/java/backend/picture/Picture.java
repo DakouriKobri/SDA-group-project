@@ -20,16 +20,21 @@ public class Picture {
     @Column(nullable = false)
     private String name;
 
-    @JsonIgnore
+
     @NotBlank
     @Column(nullable = false)
     String location;
 
-    @OneToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn
     private User pictureOwner;
 
-    public Picture(User pictureOwner) {
-        this.pictureOwner = pictureOwner;
+   /* @OneToOne(targetEntity = User.class, cascade = CascadeType.ALL)
+    @JoinColumn
+    private User pictureOwner;*/
+
+    public Picture() {
     }
 
     public Picture(String pictureName, String location) {
@@ -59,5 +64,13 @@ public class Picture {
 
     public void setLocation(String location) {
         this.location = location;
+    }
+
+    public User getPictureOwner() {
+        return pictureOwner;
+    }
+
+    public void setPictureOwner(User pictureOwner) {
+        this.pictureOwner = pictureOwner;
     }
 }

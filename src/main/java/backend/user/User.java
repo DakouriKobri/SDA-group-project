@@ -2,11 +2,14 @@ package backend.user;
 
 
 import backend.picture.Picture;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="account")
@@ -21,6 +24,7 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
+    @JsonIgnore
     @Length(min = 5, max=100, message = "Password length most be between 5-100 characters")
     @Column(name = "password")
     private String password;
@@ -29,12 +33,8 @@ public class User {
     @Column(name = "name")
     private String name;
 
-    @OneToOne(mappedBy = "pictureOwner",targetEntity= Picture.class)
-    private Picture picture;
-/*
-    @OneToOne(mappedBy = "fileOwner",targetEntity= FileDB.class)
-    private FileDB fileDB;
-*/
+    @OneToMany(mappedBy = "pictureOwner",cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    List<Picture> pictures = new ArrayList<>();
 
     // Hibernate needs a default constructor to function
     public User() {}
@@ -79,21 +79,12 @@ public class User {
         this.name = name;
     }
 
-    public Picture getPicture() {
-        return picture;
+    public List<Picture> getPictures() {
+        return pictures;
     }
 
-    public void setPicture(Picture picture) {
-        this.picture = picture;
+    public void setPictures(List<Picture> pictures) {
+        this.pictures = pictures;
     }
 
-    /*
-   public FileDB getFileDB() {
-        return fileDB;
-    }
-
-    public void setFileDB(FileDB fileDB) {
-        this.fileDB = fileDB;
-    }
-*/
 }
