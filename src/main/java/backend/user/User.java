@@ -3,6 +3,7 @@ package backend.user;
 
 import backend.picture.Picture;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -24,13 +25,13 @@ public class User {
     @Column(name = "email", unique = true)
     private String email;
 
-    @JsonIgnore
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Length(min = 5, max=100, message = "Password length most be between 5-100 characters")
     @Column(name = "password")
     private String password;
 
     @Length(min = 3, max=100, message = "Name must be between 3-100 characters")
-    @Column(name = "name")
+    @Column(name = "in_style_name")
     private String name;
 
     @OneToMany(mappedBy = "pictureOwner",cascade = CascadeType.ALL, fetch = FetchType.EAGER)

@@ -6,10 +6,12 @@ import backend.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @Service
 public class FileLocationService {
@@ -33,10 +35,13 @@ public class FileLocationService {
         String userName = authService.getLoggedInUserEmail();
         User owner = userService.findUserByEmail(userName);
 
-        Picture picture = new Picture(pictureName, location);
-        picture.setPictureOwner(owner);
+        Date date = new Date();
+        Timestamp timestamp = new Timestamp(date.getTime());
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String uploadedDate = formatter.format(timestamp);
 
-        //owner.getPictures().add(picture);
+        Picture picture = new Picture(pictureName, uploadedDate, location);
+        picture.setPictureOwner(owner);
 
         return pictureDbRepository.save(picture).getId();
     }
