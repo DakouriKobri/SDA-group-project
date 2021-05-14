@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import java.sql.Timestamp;
 
 @Table
 @Entity
@@ -21,6 +20,11 @@ public class Picture {
     @Column(nullable = false)
     private String name;
 
+    /*@NotBlank
+    @Column(nullable = false)
+    private String likes;*/
+
+    @NotBlank
     @Column(nullable = false)
     private String uploadedDate;
 
@@ -42,6 +46,13 @@ public class Picture {
         this.uploadedDate = uploadedDate;
     }
 
+    /*public Picture(String pictureName, String likes, String uploadedDate, String location) {
+        this.name = pictureName;
+        this.likes = likes;
+        this.location = location;
+        this.uploadedDate = uploadedDate;
+    }*/
+
     public long getId() {
         return id;
     }
@@ -58,13 +69,13 @@ public class Picture {
         this.name = name;
     }
 
-    public String getUploadedDate() {
-        return uploadedDate;
+/*    public String getLikes() {
+        return likes;
     }
 
-    public void setUploadedDate(String uploadedDate) {
-        this.uploadedDate = uploadedDate;
-    }
+    public void setLikes(String likes) {
+        this.likes = likes;
+    }*/
 
     public String getLocation() {
         return location;
@@ -74,6 +85,13 @@ public class Picture {
         this.location = location;
     }
 
+    public String getUploadedDate() {
+        return uploadedDate;
+    }
+
+    public void setUploadedDate(String uploadedDate) {
+        this.uploadedDate = uploadedDate;
+    }
     public User getPictureOwner() {
         return pictureOwner;
     }

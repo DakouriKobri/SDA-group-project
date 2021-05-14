@@ -37,10 +37,6 @@ public class FileDB {
     @OneToOne(targetEntity = User.class, cascade = CascadeType.ALL)
     private User fileOwner;
 
-    TO USER___________________
-    @OneToOne(mappedBy = "fileOwner",targetEntity= FileDB.class)
-    private FileDB fileDB;
-    ___________________________
 
 
 

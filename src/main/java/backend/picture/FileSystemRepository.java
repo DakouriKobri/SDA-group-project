@@ -39,19 +39,4 @@ public class FileSystemRepository {
         }
     }
 
-
-
-
-
-    /*String RESOURCE_DIR = FileSystemRepository.class.getResource("/uploads").getPath();
-
-    String save(byte[] content, String pictureName) throws Exception {
-        Path newFile = Paths.get(RESOURCE_DIR + new Date().getTime() + "-" + pictureName);
-        Files.createDirectories(newFile.getParent());
-
-        Files.write(newFile, content);
-
-        return newFile.toAbsolutePath().toString();
-    }
-*/
 }
