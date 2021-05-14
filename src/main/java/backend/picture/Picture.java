@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-
 @Table
 @Entity
 public class Picture {
@@ -20,38 +19,39 @@ public class Picture {
     @Column(nullable = false)
     private String name;
 
-    /*@NotBlank
-    @Column(nullable = false)
-    private String likes;*/
-
     @NotBlank
     @Column(nullable = false)
     private String uploadedDate;
 
     @NotBlank
     @Column(nullable = false)
+    //@JsonIgnore
     String location;
+
+    private int likes = 0;
+    private int dislikes = 0;
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn
     private User pictureOwner;
 
+
+
     public Picture() {
     }
 
-    public Picture(String pictureName, String uploadedDate, String location) {
+    public Picture(@NotBlank String pictureName,
+                   @NotBlank String uploadedDate,
+                   @NotBlank String location,
+                   int likes,
+                   int dislikes) {
         this.name = pictureName;
-        this.location = location;
         this.uploadedDate = uploadedDate;
-    }
-
-    /*public Picture(String pictureName, String likes, String uploadedDate, String location) {
-        this.name = pictureName;
+        this.location = location;
         this.likes = likes;
-        this.location = location;
-        this.uploadedDate = uploadedDate;
-    }*/
+        this.dislikes = dislikes;
+    }
 
     public long getId() {
         return id;
@@ -69,14 +69,6 @@ public class Picture {
         this.name = name;
     }
 
-/*    public String getLikes() {
-        return likes;
-    }
-
-    public void setLikes(String likes) {
-        this.likes = likes;
-    }*/
-
     public String getLocation() {
         return location;
     }
@@ -92,11 +84,36 @@ public class Picture {
     public void setUploadedDate(String uploadedDate) {
         this.uploadedDate = uploadedDate;
     }
+
     public User getPictureOwner() {
         return pictureOwner;
     }
 
     public void setPictureOwner(User pictureOwner) {
         this.pictureOwner = pictureOwner;
+    }
+
+    public int getLikes() {
+        return likes;
+    }
+
+    public void setLikes(int likes) {
+        this.likes = likes;
+    }
+
+    public int getDislikes() {
+        return dislikes;
+    }
+
+    public void setDislikes(int dislikes) {
+        this.dislikes = dislikes;
+    }
+
+    public void addLike() {
+        this.likes++;
+    }
+
+    public void addDisLike() {
+        this.dislikes++;
     }
 }

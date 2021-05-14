@@ -40,13 +40,13 @@ public class FileLocationService {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String uploadedDate = formatter.format(timestamp);
 
-        Picture picture = new Picture(pictureName, uploadedDate, location);
+        Picture picture = new Picture(pictureName, uploadedDate, location, 0, 0);
         picture.setPictureOwner(owner);
 
         return pictureDbRepository.save(picture).getId();
     }
 
-    FileSystemResource find(Long pictureId) {
+    public FileSystemResource find(Long pictureId) {
         Picture picture = pictureDbRepository.findById(pictureId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
 
