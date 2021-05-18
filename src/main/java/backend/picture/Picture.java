@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+
 @Table
 @Entity
 public class Picture {
@@ -33,10 +34,11 @@ public class Picture {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn
+    //@JoinColumn
     private User pictureOwner;
 
-
+    //@OneToOne
+    //private User avatarOwner;
 
     public Picture() {
     }
@@ -116,4 +118,12 @@ public class Picture {
     public void addDisLike() {
         this.dislikes++;
     }
+
+    /*public User getAvatarOwner() {
+        return avatarOwner;
+    }
+
+    public void setAvatarOwner(User avatarOwner) {
+        this.avatarOwner = avatarOwner;
+    }*/
 }

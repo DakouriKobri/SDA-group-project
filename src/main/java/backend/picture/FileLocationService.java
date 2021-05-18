@@ -17,7 +17,7 @@ import java.util.Date;
 public class FileLocationService {
 
     @Autowired
-    private AuthService authService;
+    AuthService authService;
 
     @Autowired
     FileSystemRepository fileSystemRepository;
@@ -52,4 +52,10 @@ public class FileLocationService {
 
         return fileSystemRepository.findInFileSystem(picture.getLocation());
     }
+
+    public Picture findPicture(Long pictureId) {
+        return pictureDbRepository.findById(pictureId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+    }
+
 }

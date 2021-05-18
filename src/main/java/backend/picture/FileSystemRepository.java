@@ -9,12 +9,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
-import java.util.Optional;
 
 @Repository
 public class FileSystemRepository {
 
-    private final String pictureDirectory = System.getProperty("user.dir") + "/uploads/";
+    private final String pictureDirectory = System.getProperty("user.dir") + "/pictureUploads/";
 
     public void makeDirectoryIfNotExist(String pictureDirectory) {
         File directory = new File(this.pictureDirectory);
@@ -32,7 +31,7 @@ public class FileSystemRepository {
         return path.toAbsolutePath().toString();
     }
 
-    FileSystemResource findInFileSystem(String location) {
+    public FileSystemResource findInFileSystem(String location) {
         try {
             return new FileSystemResource(Paths.get(location));
         } catch (Exception e) {
